@@ -1,5 +1,8 @@
 let boxes = document.querySelectorAll(".box");
 var resetBtn = document.querySelector("#reset");
+let newGameBtn = document.querySelector("#new-game");
+let msgDiv = document.querySelector(".message");
+let msg = document.querySelector("#msg")
 
 
  let turnO = true;  //playerX, playerO
@@ -25,16 +28,38 @@ var resetBtn = document.querySelector("#reset");
             boxey.innerText = "X";
             turnO = true;
         }
-
 //disables the interactivity of the boxey element, 
 //typically used to prevent further clicks or interactions on that element.
 //prevent repetitive clicks in the game so that players cannot change their value again
         boxey.disabled=true;  
 
-    
         checkWinner();
     });
 });
+
+
+
+
+
+//disabling the boxes so that after winner is confirmed player cannot continue the same game.
+const disableBoxes = ()=>{
+    for(let box of boxes){
+        box.disabled= true;
+    }
+}
+
+const enableBoxes = ()=>{
+    for(let box of boxes){
+        box.disabled= false;
+        box.innerText = "";
+    }
+}
+const whoisWinner= (winner)=>{
+    msg.innerHTML = `Hooray, Winner is ${winner}`;
+    msgDiv.classList.remove("hide");
+    disableBoxes();
+}
+
 
 const checkWinner = ()=>{
     for(let pattern of winningPatterns){
@@ -48,14 +73,26 @@ const checkWinner = ()=>{
         let position3Value = boxes[pattern[2]].innerText;
 
         if(position1Value != "" && position2Value != "" && position3Value !=""){
-            if(position1Value === position2Value && position2Value === position3Value){
-                console.log("winner")
+            if(position1Value === position2Value && position2Value === position3Value){                
+              whoisWinner(position1Value);
             }
         }
 
 
     }
-}
+};
 
+
+
+const resetGame =()=>{
+    turnO = true;
+    enableBoxes();
+    msgDiv.classList.add("hide");
+
+};
+
+
+newGameBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
 
 
