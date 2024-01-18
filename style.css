@@ -39,10 +39,12 @@ body{
     box-shadow: 0 0 1rem rgba(0,0,0,0.8);
     font-size: 8vmin;
     color: #FF570A;
+    background-color: wheat;
 }
 
 .box:hover{
    background-color: #e8ddc6;
+   cursor: pointer;
 }
 
 #reset{
