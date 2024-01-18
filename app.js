@@ -22,10 +22,13 @@ let msg = document.querySelector("#msg")
         console.log("clicked")
         if (turnO){      //same as turnO === true
             boxey.innerText = "O";
+            boxey.style.color = "Red"
+            
             turnO = false;
         }
         else{
             boxey.innerText = "X";
+            boxey.style.color = "Green"
             turnO = true;
         }
 //disables the interactivity of the boxey element, 
